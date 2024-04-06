@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: rgb(238, 174, 202);
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+}
+
+.border {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 5px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  align-items: center;
+  background-color: #a598d6;
+  margin-bottom: 10px;
+  h2 {
+    margin: 0;
+  }
+}
+
+.mat-mdc-text-field-wrapper {
+  background-color: rgb(196 163 200 / 7%) !important;
+  border-bottom: none !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: rgb(196 163 200 / 7%) !important;
+}

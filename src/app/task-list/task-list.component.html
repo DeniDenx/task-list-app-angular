@@ -1,0 +1,62 @@
+<div class="container">
+
+    <div cdkDropListGroup style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <div style="display: flex; justify-content: center; width: 100%; align-items: center; margin-bottom: 10px;">
+            <button mat-flat-button color="primary" (click)="addList()">Add New List</button>
+        </div>
+        @for (list of taskList; track idx; let idx = $index) {
+        <div class="example-container">
+            <div class="border">
+                @if (currentEditListId === list.id) {
+                <mat-form-field style="display: flex; width: 100%;" class="example-full-width">
+                    <mat-label>Name</mat-label>
+                    <input #myInput matInput required [(ngModel)]="list.name" placeholder="Name... " autofocus>
+                </mat-form-field>
+                }@else {
+                <h2>{{list.name}}</h2>
+                }
+
+                <div style="display: flex;">
+                    <span class="material-icons" style="cursor: pointer;" (click)="addTask(list.id, idx)">add</span>
+                    <span class="material-icons" style="cursor: pointer;"
+                        (click)="editList(list.id)">{{currentEditListId === list.id ? 'save' : 'edit'}}</span>
+                    <span class="material-icons" style="cursor: pointer;"
+                        (click)="deleteList(list.id, idx, (currentEditListId === list.id ? true : false))">{{currentEditListId
+                        === list.id ? 'cancel' :
+                        'delete'}}</span>
+                </div>
+            </div>
+            <div cdkDropList [cdkDropListData]="list.list" class="example-list" (cdkDropListDropped)="drop($event)">
+                @for (task of list.list; track idx; let idx = $index) {
+
+                <div class="example-box" cdkDrag>
+                    @if (currentEditTaskListId == list.id && currentEditTaskIdx == idx) {
+                    <mat-form-field style="display: flex; width: 100%;" class="example-full-width">
+                        <mat-label>Task</mat-label>
+                        <input matInput trim [(ngModel)]="list.list[idx]" placeholder="Some task..." autofocus>
+                    </mat-form-field>
+                    } @else {
+                    <span>{{task}}</span>
+                    }
+                    <div style="display: flex; justify-content: flex-end;">
+                        <span class="material-icons" style="cursor: pointer;" (click)="editTask(list.id, idx)">{{
+                            currentEditTaskListId == list.id && currentEditTaskIdx == idx ? 'save' : 'edit'}}</span>
+                        <span class="material-icons" style="cursor: pointer;"
+                            (click)="deleteTask(list.id, idx, (currentEditTaskListId == list.id && currentEditTaskIdx == idx ? true : false) )">
+                            {{currentEditTaskListId == list.id && currentEditTaskIdx == idx ? 'cancel' :
+                            'delete'}}</span>
+                    </div>
+                </div>
+
+                } @empty {
+                <div style="display: flex; justify-content: center; align-items: center; height: 60px;">
+                    Nothing...
+                </div>
+                }
+
+            </div>
+
+        </div>
+
+        }
+    </div>
